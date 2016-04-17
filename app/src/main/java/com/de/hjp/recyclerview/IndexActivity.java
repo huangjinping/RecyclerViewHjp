@@ -11,6 +11,12 @@ import android.view.View;
  */
 public class IndexActivity  extends AppCompatActivity {
 
+
+
+
+   String  a;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
