@@ -13,7 +13,6 @@ public class NickActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-
         String a="asdasdasd";
         System.out.print(""+a);
     }
