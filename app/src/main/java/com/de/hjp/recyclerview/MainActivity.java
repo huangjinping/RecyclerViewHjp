@@ -1,8 +1,11 @@
 package com.de.hjp.recyclerview;
 
+import android.content.ClipData;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,16 +16,40 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.de.hjp.recyclerview.collection.CollectionActivity;
+import com.de.hjp.recyclerview.eventbus.EventBusFirstActivity;
+import com.de.hjp.recyclerview.index.IndexAdapter;
+import com.de.hjp.recyclerview.index.Item;
+import com.de.hjp.recyclerview.rxjava.RxJavaActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private RecyclerView rec_index;
+    private IndexAdapter indexAdapter;
+    private List<Item> dataList=new ArrayList<>();
+    private Class[] CLAZZES = new Class[]
+            {
+                    EventBusFirstActivity.class,
+                    CollectionActivity.class,
+                    RxJavaActivity.class,
+                    IndexActivity.class,
+            };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("首页");
+        rec_index=(RecyclerView)findViewById(R.id.rec_index);
 
+        rec_index.setLayoutManager(new LinearLayoutManager(this));
+        indexAdapter=new IndexAdapter(CLAZZES);
+        rec_index.setAdapter(indexAdapter);
+        toolbar.setTitle("首页");
         setSupportActionBar(toolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -38,10 +65,10 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
 
     @Override
     public void onBackPressed() {
@@ -99,4 +126,10 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
+
+
+
 }

@@ -59,6 +59,7 @@ public class SecendActivity extends AppCompatActivity {
     private void initView() {
         rec_list = (RecyclerView) findViewById(R.id.rec_list);
         layout_swi = (SwipeRefreshLayout) findViewById(R.id.layout_swi);
+        rec_list.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL_LIST));
     }
 
 
