@@ -3,12 +3,12 @@
     package="com.de.hjp.recyclerview">
 
 
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" ></uses-permission>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" ></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" ></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" ></uses-permission>
-    <uses-permission android:name="android.permission.INTERNET" ></uses-permission>
-    <uses-permission android:name="android.permission.WAKE_LOCK" ></uses-permission>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 
@@ -18,26 +18,42 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name=".SecendActivity">
-
-        </activity>
-
-        <activity android:name=".IndexActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SecendActivity">
+
+        </activity>
+
+        <activity android:name=".rxjava.RxJavaActivity">
+
+        </activity>
+
+        <activity android:name=".IndexActivity">
+
+        </activity>
 
         <activity android:name=".GalleryActivity">
 
         </activity>
+        <activity android:name=".collection.CollectionActivity">
+
+        </activity>
+
+        <activity android:name=".eventbus.EventBusFirstActivity">
+
+        </activity>
+
+        <activity android:name=".eventbus.EventBusSecendActivity"></activity>
+
+        <activity android:name=".jsjava.JavaActivity"></activity>
+        <activity android:name=".jsjava.WebActivity"></activity>
+        <activity android:name=".xListview.XListViewActivity"></activity>
 
     </application>
 </manifest>

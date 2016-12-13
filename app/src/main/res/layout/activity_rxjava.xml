@@ -17,7 +17,6 @@
         android:text="Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:id="@+id/button" />
 
     <ImageView
@@ -26,4 +25,11 @@
         android:visibility="gone"
         android:background="@color/colorPrimary"
         android:id="@+id/imageView" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rec_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ></android.support.v7.widget.RecyclerView>
 </LinearLayout>

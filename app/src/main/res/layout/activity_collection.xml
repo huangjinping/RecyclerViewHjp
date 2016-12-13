@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layout_content_view"
+    android:gravity="center"
+    android:orientation="vertical">
 
 
     <Button
-        android:text="ParseArray"
+        android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onParseArray"
-        android:id="@+id/button2" />
+        android:text="ParseArray" />
 
 
-            <android.support.design.widget.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:onClick="onArrayMap"
-                />
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:onClick="onArrayMap" />
+
+<ImageView
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:onClick="onSetImage"
+    android:background="@color/myTrances"
+    />
+
+    <com.de.hjp.recyclerview.GifImage
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@color/colorAccent"
+        ></com.de.hjp.recyclerview.GifImage>
 </LinearLayout>
