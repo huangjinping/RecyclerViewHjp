@@ -20,7 +20,9 @@ import com.de.hjp.recyclerview.collection.CollectionActivity;
 import com.de.hjp.recyclerview.eventbus.EventBusFirstActivity;
 import com.de.hjp.recyclerview.index.IndexAdapter;
 import com.de.hjp.recyclerview.index.Item;
+import com.de.hjp.recyclerview.jsjava.JavaActivity;
 import com.de.hjp.recyclerview.rxjava.RxJavaActivity;
+import com.de.hjp.recyclerview.xListview.XListViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity
                     CollectionActivity.class,
                     RxJavaActivity.class,
                     IndexActivity.class,
+                    JavaActivity.class,
+                    XListViewActivity.class,
             };
 
     @Override

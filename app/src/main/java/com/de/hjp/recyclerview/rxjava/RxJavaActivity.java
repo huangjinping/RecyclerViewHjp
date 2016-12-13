@@ -1,9 +1,13 @@
 package com.de.hjp.recyclerview.rxjava;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -17,12 +21,14 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.jakewharton.rxbinding.widget.TextViewAfterTextChangeEvent;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
@@ -37,6 +43,8 @@ public class RxJavaActivity extends AppCompatActivity implements View.OnClickLis
     private Button button;
     private ImageView imageView;
     private EditText editText;
+    private RecyclerView rec_horizontal;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,8 +54,7 @@ public class RxJavaActivity extends AppCompatActivity implements View.OnClickLis
         RxView.clicks(button).throttleFirst(10000, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                Log.d("hjp", Thread.currentThread().getName());
-                button.setText("===hjp====" + button.getId());
+                onOpen(button);
             }
         });
 
@@ -69,9 +76,59 @@ public class RxJavaActivity extends AppCompatActivity implements View.OnClickLis
 //        initRxjava5(R.mipmap.ic_launcher, imageView);
 //        initRxjava6(R.mipmap.ic_launcher, imageView);
 //        initRxjava7(R.mipmap.ic_launcher, imageView);
-        initRxjava8(R.mipmap.ic_launcher, imageView);
-
+//        initRxjava8(R.mipmap.ic_launcher, imageView);
+        String absolutePath = Environment.getExternalStorageDirectory().getAbsolutePath();
+        File file=new File(absolutePath);
+        File[] files = file.listFiles();
+        initRxjava9(files);
     }
+
+    private void initRxjava9(File[] files) {
+
+
+        Subscription subscription = Observable.from(files).flatMap(new Func1<File, Observable<File>>() {
+            @Override
+            public Observable<File> call(File file) {
+                return Observable.from(file.listFiles());
+            }
+        }).filter(new Func1<File, Boolean>() {
+            @Override
+            public Boolean call(File file) {
+                return file.getName().endsWith(".jpg");
+            }
+        }).map(new Func1<File, Bitmap>() {
+            @Override
+            public Bitmap call(File file) {
+                return BitmapFactory.decodeFile(file.getAbsolutePath(), getSimplesize(2));
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Bitmap>() {
+            @Override
+            public void onCompleted() {
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Bitmap bitmap) {
+
+            }
+        });
+
+        subscription.isUnsubscribed();
+        
+    }
+
+    private BitmapFactory.Options getSimplesize(int size){
+        BitmapFactory.Options option=new BitmapFactory.Options();
+        option.inSampleSize=size;
+        return  option;
+    }
+
+
+
 
     private void initRxjava8(final int ic_launcher, final ImageView imageView) {
         Observable.create(new Observable.OnSubscribe<Drawable>() {
@@ -346,6 +403,7 @@ public class RxJavaActivity extends AppCompatActivity implements View.OnClickLis
         button = (Button) findViewById(R.id.button);
         imageView = (ImageView) findViewById(R.id.imageView);
         editText = (EditText) findViewById(R.id.editText);
+        rec_horizontal=(RecyclerView)findViewById(R.id.rec_horizontal);
     }
 
     @Override
@@ -365,4 +423,8 @@ public class RxJavaActivity extends AppCompatActivity implements View.OnClickLis
 
 
     }
+
+
+
+
 }

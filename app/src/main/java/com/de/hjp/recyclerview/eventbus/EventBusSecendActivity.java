@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.de.hjp.recyclerview.EventRxBus;
 import com.de.hjp.recyclerview.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -23,8 +24,9 @@ public class EventBusSecendActivity extends AppCompatActivity {
     }
 
     public void sendMessage(View view) {
-        EventBus.getDefault().post("哈哈");
-
+//        EventBus.getDefault().post("哈哈");
+            RxBus.getInstance().post("sdsdsd");
+//        EventRxBus.getInstance().post("sub","dddddd");
 //        new Thread(){
 //            @Override
 //            public void run() {

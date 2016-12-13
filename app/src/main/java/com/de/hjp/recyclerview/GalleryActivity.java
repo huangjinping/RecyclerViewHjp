@@ -58,6 +58,11 @@ public class GalleryActivity extends AppCompatActivity {
         });
     }
 
+
+
+
+
+
     private void initView() {
         rec_gallery = (XRecyclerView) findViewById(R.id.rec_gallery);
     }
