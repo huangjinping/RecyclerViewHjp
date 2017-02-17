@@ -12,9 +12,13 @@ import android.widget.Toast;
 
 import com.androidadvance.topsnackbar.TSnackbar;
 import com.bumptech.glide.Glide;
+import com.de.hjp.recyclerview.CornersTransform;
 import com.de.hjp.recyclerview.R;
+import com.de.hjp.recyclerview.glide.GlideCircleTransform;
 
 
+//Glid 高级使用
+//http://www.tuicool.com/articles/eUBjmai
 
 /**
  * Created by harrishuang on 2016/12/10.
@@ -71,6 +75,7 @@ public class CollectionActivity extends AppCompatActivity {
     }
 
     public void onSetImage(View view) {
+
         try {
 
             TSnackbar.make(findViewById(R.id.layout_content_view),"Hello from TSnackBar.", TSnackbar.LENGTH_LONG).show();
@@ -79,4 +84,6 @@ public class CollectionActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
 }

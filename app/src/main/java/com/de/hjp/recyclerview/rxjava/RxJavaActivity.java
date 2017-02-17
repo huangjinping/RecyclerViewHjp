@@ -10,16 +10,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.de.hjp.recyclerview.R;
+import com.de.hjp.recyclerview.view.PushTextView;
+import com.jakewharton.rxbinding.support.v7.widget.RxRecyclerView;
 import com.jakewharton.rxbinding.view.RxView;
+import com.jakewharton.rxbinding.widget.AdapterViewItemLongClickEvent;
+import com.jakewharton.rxbinding.widget.RxAdapter;
+import com.jakewharton.rxbinding.widget.RxAdapterView;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.jakewharton.rxbinding.widget.TextViewAfterTextChangeEvent;
+import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -33,6 +41,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
+import rx.plugins.RxJavaErrorHandler;
 import rx.schedulers.Schedulers;
 
 /**
@@ -44,6 +53,8 @@ public class RxJavaActivity extends AppCompatActivity implements View.OnClickLis
     private ImageView imageView;
     private EditText editText;
     private RecyclerView rec_horizontal;
+    private PushTextView txt_push;
+
 
 
     @Override
@@ -58,27 +69,46 @@ public class RxJavaActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-        RxTextView.afterTextChangeEvents(editText).subscribe(new Action1<TextViewAfterTextChangeEvent>() {
-            @Override
-            public void call(TextViewAfterTextChangeEvent textViewAfterTextChangeEvent) {
 
+        Subscription hjp = RxView.drags(imageView).subscribe(new Action1<DragEvent>() {
+            @Override
+            public void call(DragEvent dragEvent) {
+                Log.d("hjp", dragEvent.getX() + "=====" + dragEvent.getY());
             }
         });
+
+
+
+
+
+
+        RxTextView.textChangeEvents(editText).debounce(300,TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<TextViewTextChangeEvent>() {
+                    @Override
+                    public void call(TextViewTextChangeEvent textViewTextChangeEvent) {
+                        String key = textViewTextChangeEvent.text().toString();
+                    }
+                });
+
+
+
+
 
 
     }
 
     public void onOpen(View view) {
-//        initRxjava1();
-//        initRxjava2();
-//        initRxjava3();
-//        initRxjava4();
-//        initRxjava5(R.mipmap.ic_launcher, imageView);
-//        initRxjava6(R.mipmap.ic_launcher, imageView);
-//        initRxjava7(R.mipmap.ic_launcher, imageView);
-//        initRxjava8(R.mipmap.ic_launcher, imageView);
+        initRxjava1();
+        initRxjava2();
+        initRxjava3();
+        initRxjava4();
+        initRxjava5(R.mipmap.ic_launcher, imageView);
+        initRxjava6(R.mipmap.ic_launcher, imageView);
+        initRxjava7(R.mipmap.ic_launcher, imageView);
+        initRxjava8(R.mipmap.ic_launcher, imageView);
         String absolutePath = Environment.getExternalStorageDirectory().getAbsolutePath();
-        File file=new File(absolutePath);
+        File file = new File(absolutePath);
         File[] files = file.listFiles();
         initRxjava9(files);
     }
@@ -118,16 +148,14 @@ public class RxJavaActivity extends AppCompatActivity implements View.OnClickLis
         });
 
         subscription.isUnsubscribed();
-        
+
     }
 
-    private BitmapFactory.Options getSimplesize(int size){
-        BitmapFactory.Options option=new BitmapFactory.Options();
-        option.inSampleSize=size;
-        return  option;
+    private BitmapFactory.Options getSimplesize(int size) {
+        BitmapFactory.Options option = new BitmapFactory.Options();
+        option.inSampleSize = size;
+        return option;
     }
-
-
 
 
     private void initRxjava8(final int ic_launcher, final ImageView imageView) {
@@ -403,7 +431,8 @@ public class RxJavaActivity extends AppCompatActivity implements View.OnClickLis
         button = (Button) findViewById(R.id.button);
         imageView = (ImageView) findViewById(R.id.imageView);
         editText = (EditText) findViewById(R.id.editText);
-        rec_horizontal=(RecyclerView)findViewById(R.id.rec_horizontal);
+        rec_horizontal = (RecyclerView) findViewById(R.id.rec_horizontal);
+        txt_push = (PushTextView) findViewById(R.id.txt_push);
     }
 
     @Override
@@ -426,5 +455,8 @@ public class RxJavaActivity extends AppCompatActivity implements View.OnClickLis
 
 
 
+    public void onPushView(View view) {
+        txt_push.setPushText(34123,500);
+    }
 
 }

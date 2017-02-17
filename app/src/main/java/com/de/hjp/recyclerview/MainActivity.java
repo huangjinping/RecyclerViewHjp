@@ -1,7 +1,8 @@
 package com.de.hjp.recyclerview;
 
-import android.content.ClipData;
+
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,11 +19,16 @@ import android.view.MenuItem;
 
 import com.de.hjp.recyclerview.collection.CollectionActivity;
 import com.de.hjp.recyclerview.eventbus.EventBusFirstActivity;
+import com.de.hjp.recyclerview.glide.GlideActivity;
 import com.de.hjp.recyclerview.index.IndexAdapter;
 import com.de.hjp.recyclerview.index.Item;
 import com.de.hjp.recyclerview.jsjava.JavaActivity;
+import com.de.hjp.recyclerview.jsjava.WebActivity;
 import com.de.hjp.recyclerview.rxjava.RxJavaActivity;
+import com.de.hjp.recyclerview.view.CostomViewActivity;
 import com.de.hjp.recyclerview.xListview.XListViewActivity;
+import com.tencent.mars.xlog.Log;
+import com.tencent.mars.xlog.Xlog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,12 +47,18 @@ public class MainActivity extends AppCompatActivity
                     IndexActivity.class,
                     JavaActivity.class,
                     XListViewActivity.class,
+                    GlideActivity.class,
+                    CostomViewActivity.class,
+                    WebActivity.class
             };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        initLog();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         rec_index=(RecyclerView)findViewById(R.id.rec_index);
 
@@ -132,8 +144,26 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+  private void initLog(){
+//      final String SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath();
+//      final String logPath = SDCARD + "/marssample/log";
+
+//init xlog
+//      if (BuildConfig.DEBUG) {
+//          Xlog.appenderOpen(Xlog.LEVEL_DEBUG, Xlog.AppednerModeAsync, "", logPath, "MarsSample");
+//          Xlog.setConsoleLogOpen(true);
+//
+//      } else {
+//          Xlog.appenderOpen(Xlog.LEVEL_INFO, Xlog.AppednerModeAsync, "", logPath, "MarsSample");
+//          Xlog.setConsoleLogOpen(false);
+//      }
+//      Log.setLogImp(new Xlog());
+  }
 
 
 
-
+    static {
+        System.loadLibrary("stlport_shared");
+        System.loadLibrary("marsxlog");
+    }
 }

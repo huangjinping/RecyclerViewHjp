@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 
 import com.de.hjp.recyclerview.R;
 import com.de.hjp.recyclerview.xListview.xlistView.XListView;
+import com.jakewharton.rxbinding.widget.RxAdapter;
+import com.jakewharton.rxbinding.widget.RxAdapterView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +17,12 @@ import java.util.List;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
+ *
  * Created by harrishuang on 2016/12/13.
  */
 
@@ -33,7 +38,6 @@ public class XListViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_xlistview);
         initView();
         initData();
-
     }
 
     private void initData() {
@@ -46,19 +50,31 @@ public class XListViewActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         list_xlist.setPullRefreshEnable(true);
         list_xlist.setPullRefreshEnable(true);
-        System.out.println("ddddddddddddddddddddd");
         list_xlist.setXListViewListener(new XListView.IXListViewListener() {
             @Override
             public void onRefresh() {
                 startRefresh();
             }
 
-
             @Override
             public void onLoadMore() {
-
             }
         });
+
+        adapter.notifyDataSetChanged();
+
+
+        RxAdapter.dataChanges(adapter).map(new Func1<ArrayAdapter<String>, String>() {
+             @Override
+             public String call(ArrayAdapter<String> stringArrayAdapter) {
+                 return "======";
+             }
+         }).subscribe(new Action1<String>() {
+             @Override
+             public void call(String s) {
+                 Log.d("hjp","String"+s);
+             }
+         });
     }
 
     private void initView() {
@@ -66,15 +82,11 @@ public class XListViewActivity extends AppCompatActivity {
     }
 
     private void startRefresh() {
-        Log.d("hjp", "========");
-
         Observable.create(new Observable.OnSubscribe<Object>() {
 
             @Override
             public void call(Subscriber<? super Object> subscriber) {
                 try {
-                    Log.d("hjp", "========");
-
                     Thread.sleep(2 * 1000);
                     subscriber.onNext("ddd");
 

@@ -35,6 +35,14 @@ public class EventBusFirstActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eventfirst);
         initView();
+
+
+
+
+
+
+
+
         EventBus.getDefault().register(this);
         Observable<Object> observable = RxBus.getInstance().register(this);
         Observable<Object> register = EventRxBus.getInstance().register("sub");
@@ -91,21 +99,24 @@ public class EventBusFirstActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN, priority = 10)
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(String param) {
         System.out.println(Thread.currentThread().getName());
         Toast.makeText(this, "" + param, Toast.LENGTH_SHORT).show();
         textView2.setText(param);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN, priority = 100)
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
     public void onEventPostThread(String param) {
         System.out.println("onEventPostThread" + Thread.currentThread().getName());
         EventBus.getDefault().cancelEventDelivery(this);
 
     }
 
-    @Subscribe
+
+
+
+    @Subscribe(threadMode = ThreadMode.ASYNC)
     public void onEventBackgroundThread(String param) {
 
     }
