@@ -2,43 +2,45 @@ package com.de.hjp.recyclerview;
 
 
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.de.hjp.recyclerview.collection.CollectionActivity;
+import com.de.hjp.recyclerview.dagger2.Dagger2Activity;
 import com.de.hjp.recyclerview.eventbus.EventBusFirstActivity;
 import com.de.hjp.recyclerview.glide.GlideActivity;
 import com.de.hjp.recyclerview.index.IndexAdapter;
 import com.de.hjp.recyclerview.index.Item;
 import com.de.hjp.recyclerview.jsjava.JavaActivity;
+import com.de.hjp.recyclerview.jsjava.JsBridgeActivity;
 import com.de.hjp.recyclerview.jsjava.WebActivity;
+import com.de.hjp.recyclerview.listview.ListActivity;
+import com.de.hjp.recyclerview.retrofit.RetrofitActivity;
 import com.de.hjp.recyclerview.rxjava.RxJavaActivity;
+import com.de.hjp.recyclerview.timer.TimedTask;
 import com.de.hjp.recyclerview.view.CostomViewActivity;
 import com.de.hjp.recyclerview.xListview.XListViewActivity;
-import com.tencent.mars.xlog.Log;
-import com.tencent.mars.xlog.Xlog;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
     private RecyclerView rec_index;
     private IndexAdapter indexAdapter;
-    private List<Item> dataList=new ArrayList<>();
+    private List<Item> dataList = new ArrayList<>();
     private Class[] CLAZZES = new Class[]
             {
                     EventBusFirstActivity.class,
@@ -49,7 +51,13 @@ public class MainActivity extends AppCompatActivity
                     XListViewActivity.class,
                     GlideActivity.class,
                     CostomViewActivity.class,
-                    WebActivity.class
+                    WebActivity.class,
+                    Dagger2Activity.class,
+                    WindowManagerActivity.class,
+                    RetrofitActivity.class,
+                    JsBridgeActivity.class,
+                    ContactsActivity.class,
+                    ListActivity.class
             };
 
     @Override
@@ -57,13 +65,27 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        System.out.println("=====>task111>>>>>");
+
+        TimedTask timedTask = TimedTask.getTimedTask();
+        timedTask.setRecLen(1000);
+        timedTask.requestListener(new TimedTask.TimedTaskListener() {
+
+            @Override
+            public void onTimedTask(int recLen) {
+                Log.d("ddd", "=====>>>>>>" + recLen);
+                System.out.println("=====>task111>>>>>6");
+                System.out.println("=====>>>>>>" + recLen);
+            }
+        });
+        timedTask.start();
         initLog();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        rec_index=(RecyclerView)findViewById(R.id.rec_index);
+        rec_index = (RecyclerView) findViewById(R.id.rec_index);
 
         rec_index.setLayoutManager(new LinearLayoutManager(this));
-        indexAdapter=new IndexAdapter(CLAZZES);
+        indexAdapter = new IndexAdapter(CLAZZES);
         rec_index.setAdapter(indexAdapter);
         toolbar.setTitle("首页");
         setSupportActionBar(toolbar);
@@ -144,7 +166,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-  private void initLog(){
+    private void initLog() {
 //      final String SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath();
 //      final String logPath = SDCARD + "/marssample/log";
 
@@ -158,8 +180,7 @@ public class MainActivity extends AppCompatActivity
 //          Xlog.setConsoleLogOpen(false);
 //      }
 //      Log.setLogImp(new Xlog());
-  }
-
+    }
 
 
     static {

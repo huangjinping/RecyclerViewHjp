@@ -22,9 +22,18 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:visibility="gone"
         android:background="@color/colorPrimary"
         android:id="@+id/imageView" />
+
+    <com.de.hjp.recyclerview.view.PushTextView
+        android:id="@+id/txt_push"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:textColor="#000000"
+        android:text="adasd"
+        android:background="@color/colorAccent"
+        android:onClick="onPushView"
+        />
 
 
     <android.support.v7.widget.RecyclerView

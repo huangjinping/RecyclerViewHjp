@@ -28,9 +28,9 @@
     android:background="@color/myTrances"
     />
 
-    <com.de.hjp.recyclerview.GifImage
+    <com.de.hjp.recyclerview.GifLoadingImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@color/colorAccent"
-        ></com.de.hjp.recyclerview.GifImage>
+        ></com.de.hjp.recyclerview.GifLoadingImageView>
 </LinearLayout>
