@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        System.out.println("=====>task111>>>>>");
+//        System.out.println("=====>task111>>>>>");
 
         TimedTask timedTask = TimedTask.getTimedTask();
         timedTask.setRecLen(1000);
@@ -73,9 +73,9 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onTimedTask(int recLen) {
-                Log.d("ddd", "=====>>>>>>" + recLen);
-                System.out.println("=====>task111>>>>>6");
-                System.out.println("=====>>>>>>" + recLen);
+//                Log.d("ddd", "=====>>>>>>" + recLen);
+//                System.out.println("=====>task111>>>>>6");
+//                System.out.println("=====>>>>>>" + recLen);
             }
         });
         timedTask.start();

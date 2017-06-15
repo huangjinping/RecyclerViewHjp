@@ -56,11 +56,11 @@ public class TimedTask {
 
     // 开始定时任务
     public void start() {
-        System.out.println("=====>task111>>>>>1");
+//        System.out.println("=====>task111>>>>>1");
         if (isStart) {
             return;
         }
-        System.out.println("=====>task111>>>>>2");
+//        System.out.println("=====>task111>>>>>2");
 
         timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -68,13 +68,13 @@ public class TimedTask {
             @Override
             public void run() {
 
-                System.out.println("=====>task111>>>>>3");
+//                System.out.println("=====>task111>>>>>3");
 
                 try {
                     recLen--;
                     int count = mTaskList.size();
                     for (int i = 0; i < count; ++i) {
-                        System.out.println("=====>task111>>>>>4");
+//                        System.out.println("=====>task111>>>>>4");
                         mTaskList.get(count - i - 1).onTimedTask(recLen);
                     }
                     if (DEBUG) {

@@ -1,6 +1,9 @@
 package com.de.hjp.recyclerview.dagger2;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
+import dagger.Provides;
 
 /**
  * Created by harrishuang on 2017/4/24.
@@ -8,11 +11,12 @@ import dagger.Module;
 @Module   //提供依赖对象的实例
 public class MainModule {
     // 关键字，标明该方法提供依赖对象
-//    @Provides
-//    Person providerPerson() {
-//        //提供Person对象
-//        return new Person();
-//    }
+    @Singleton
+    @Provides
+    Person providerPerson() {
+        //提供Person对象
+        return new Person();
+    }
 
 //    private Context mContext;
 //
