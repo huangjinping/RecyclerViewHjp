@@ -23,4 +23,8 @@ public class Person {
     public Person(String name){
         Log.i("dagger",name);
     }
+
+    public void log() {
+        Log.i("dagger","log()");
+    }
 }

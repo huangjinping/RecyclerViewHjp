@@ -4,13 +4,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.de.hjp.recyclerview.R;
 import com.de.hjp.recyclerview.mvp.contract.Dagger2Contract;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 
 /**
@@ -21,11 +19,14 @@ import javax.inject.Named;
 public class Dagger2Activity extends AppCompatActivity implements Dagger2Contract.View {
 
 
-    @Named("context") // 标记
-    @Inject
-    Person person;
+//    @Named("context") // 标记
+//    @PersonForContext
+//    @Inject
+//    Person person;
 
-    @Named("name")  // 标记
+//    @Named("name")  // 标记
+
+//    @PersonForName
     @Inject
     Person person2;
 
@@ -33,14 +34,14 @@ public class Dagger2Activity extends AppCompatActivity implements Dagger2Contrac
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dagger2);
-//        MainComponent build = DaggerMainComponent.builder().mainModule(new MainModule()).build();
-//        //注入当前
-//        build.inject(this);
-        component.inject(this);
-
-        AppComponent appCom = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
-        ActivityComponent build = DaggerActivityComponent.builder().appComponent(appCom).activityMoudule(new ActivityMoudule()).build();
+        MainComponent build = DaggerMainComponent.builder().mainModule(new MainModule(this)).build();
+        //注入当前
         build.inject(this);
+//        component.inject(this);
+
+//        AppComponent appCom = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
+//        ActivityComponent build = DaggerActivityComponent.builder().appComponent(appCom).activityMoudule(new ActivityMoudule()).build();
+//        build.inject(this);
 
     }
 
@@ -50,8 +51,8 @@ public class Dagger2Activity extends AppCompatActivity implements Dagger2Contrac
      * @param view
      */
     public void onToast(View view) {
-//        person.log();
-        Toast.makeText(this, ">>>>>>v", Toast.LENGTH_SHORT).show();
+        person2.log();
+//        Toast.makeText(this, ">>>>>>v", Toast.LENGTH_SHORT).show();
     }
 
 }

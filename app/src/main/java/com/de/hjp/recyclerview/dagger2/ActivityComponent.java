@@ -7,8 +7,8 @@ import dagger.Component;
  * email : huangjinping@hdfex.com
  */
 
-@Component(dependencies = AppComponent.class, modules = ActivityMoudule.class)
+//@Component( modules = ActivityMoudule.class)
 public interface ActivityComponent {
 
-    void inject(Dagger2Activity activity);
+//    void inject(Dagger2Activity activity);
 }

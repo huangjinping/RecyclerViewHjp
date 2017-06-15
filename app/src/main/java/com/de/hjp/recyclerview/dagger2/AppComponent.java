@@ -9,7 +9,8 @@ import dagger.Component;
  * email : huangjinping@hdfex.com
  */
 
-@Component(modules = AppModule.class)
+//@PerApp
+//@Component(modules = AppModule.class)
 public interface AppComponent {
     //向其下层提供Context对象
     Context proContext();
